@@ -50,6 +50,9 @@ function finalizeWindow(aWindow) {
   removeElement(aWindow, CONTEXT_MENU_LINK_ELEMENT_ID);
   removeElement(aWindow, KEY_LIST_PANEL_ELEMENT_ID);
   removeElement(aWindow, DUMMY_FRAME_ELEMENT_ID);
+
+  aWindow.gShortcutKey2URL.shutdown();
+  aWindow.gShortcutKey2URL = null;
 }
 
 function removeElement(aWindow, id) {
@@ -172,6 +175,7 @@ function initializeMainWindow(aWindow) {
 function initializeScript(aWindow) {
 
   Services.scriptloader.loadSubScript("chrome://shortcutkey2url/content/shortcutkey2url.js", aWindow, "UTF-8");
+  aWindow.gShortcutKey2URL.init();
 }
 
 

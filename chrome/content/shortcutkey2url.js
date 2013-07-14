@@ -392,6 +392,13 @@ var gShortcutKey2URL = {
     while(parent.hasChildNodes()) {
       parent.removeChild(parent.lastChild);
     }
+  },
+
+  shutdown: function() {
+    window.removeEventListener('keypress', gShortcutKey2URL.handleShortcutKey, true);
+
+    var contextMenu = document.getElementById('contentAreaContextMenu');
+    contextMenu.removeEventListener('popupshowing', gShortcutKey2URL.handleContextMenu, false);
   }
 };
 
