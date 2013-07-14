@@ -1,0 +1,18 @@
+<!ENTITY s2u.dialog.setting.title "Paramètres de ShortcutKey2URL">
+<!ENTITY s2u.caption.general "Général">
+<!ENTITY s2u.label.startup.key "Touche d'activation">
+<!ENTITY s2u.label.characters.number "nombre de caractères (1-5)">
+<!ENTITY s2u.label.show.icon "Show icon in address bar.">
+<!ENTITY s2u.label.show.list "Show list of shortcut key by startup key.">
+<!ENTITY s2u.description.warnning "Avertissement : ce raccourci-clavier est déjà utilisé.">
+<!ENTITY s2u.caption.mapping "Choix des touches">
+<!ENTITY s2u.treecol.key "Touche">
+<!ENTITY s2u.treecol.name "Nom">
+<!ENTITY s2u.treecol.url "URL">
+<!ENTITY s2u.treecol.open.method "Mode d'ouverture">
+<!ENTITY s2u.button.add "Ajouter">
+<!ENTITY s2u.button.edit "Éditer">
+<!ENTITY s2u.button.delete "Supprimer">
+<!ENTITY s2u.caption.export.import "exportation/importation paramètres">
+<!ENTITY s2u.button.export "Exportation">
+<!ENTITY s2u.button.import "Importation">

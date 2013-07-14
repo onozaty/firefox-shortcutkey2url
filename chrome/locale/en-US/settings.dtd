@@ -1,0 +1,18 @@
+<!ENTITY s2u.dialog.setting.title "Setting - ShortcutKey2URL">
+<!ENTITY s2u.caption.general "general">
+<!ENTITY s2u.label.startup.key "startup key">
+<!ENTITY s2u.label.characters.number "number of characters (1-5)">
+<!ENTITY s2u.label.show.icon "Show icon in address bar.">
+<!ENTITY s2u.label.show.list "Show list of shortcut key by startup key.">
+<!ENTITY s2u.description.warnning "Warnning: duplicate other shortcut key.">
+<!ENTITY s2u.caption.mapping "mapping">
+<!ENTITY s2u.treecol.key "key">
+<!ENTITY s2u.treecol.name "name">
+<!ENTITY s2u.treecol.url "URL">
+<!ENTITY s2u.treecol.open.method "open method">
+<!ENTITY s2u.button.add "Add">
+<!ENTITY s2u.button.edit "Edit">
+<!ENTITY s2u.button.delete "Delete">
+<!ENTITY s2u.caption.export.import "export/import settings">
+<!ENTITY s2u.button.export "Export">
+<!ENTITY s2u.button.import "Import">

@@ -1,0 +1,4 @@
+<!ENTITY s2u.addressbar.tooltiptext "Ajouter ShortcutKey2URL">
+<!ENTITY s2u.menuitem.label "ShortcutKey2URL">
+<!ENTITY s2u.contextmenu.page.label "Ajouter ShortcutKey2URL cette page">
+<!ENTITY s2u.contextmenu.link.label "Ajouter ShortcutKey2URL ce lien">

@@ -1,0 +1,7 @@
+label[control="key"], label[control="name"], label[control="url"], label[control="openMethod"] {
+  width: 8em;
+}
+
+textbox#key *|input {
+  ime-mode: disabled;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://shortcutkey2url/skin/dialog.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM 'chrome://shortcutkey2url/locale/dialogs.dtd'>
+
+<dialog buttons="accept, cancel" id="shortcutKey2URL-editDialog" ondialogaccept="return update()" onload="init()" title="&s2u.dialog.edit.shortcutkey;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="./edit_dialog.js" />
+
+  <!--<description value="Edit" />-->
+
+  <vbox>
+    <hbox align="center">
+      <label control="key" value="&s2u.label.key;" />
+      <textbox id="key" size="5" maxlength="1" onclick="this.select();" onkeypress="inputKey(event);" />
+    </hbox>
+    <hbox align="center">
+      <label control="name" value="&s2u.label.name;" />
+      <textbox id="name" size="80" />
+    </hbox>
+    <hbox align="center">
+      <label control="url" value="&s2u.label.url;" />
+      <textbox id="url" size="80" />
+    </hbox>
+    <hbox align="center">
+      <label control="openMethod" value="&s2u.label.open.method;" />
+      <menulist id="openMethod">
+        <menupopup>
+          <menuitem label="&s2u.menuitem.search.openedtab;" value="&s2u.menuitem.search;" />
+          <menuitem label="&s2u.menuitem.new.tab;" value="&s2u.menuitem.new;" />
+          <menuitem label="&s2u.menuitem.selected.tab;" value="&s2u.menuitem.selected;" />
+        </menupopup>
+      </menulist>
+    </hbox>
+  </vbox>
+
+</dialog>

@@ -1,0 +1,21 @@
+image#shortcutKey2URL-addressbarIcon {
+  padding: 1px;
+  visibility: inherit !important;
+}
+
+menupopup#shortcutKey2URL-keyListPanel {
+  -moz-appearance: none !important;
+  background-image: none !important;
+  background-color: #1F1F1F !important;
+  padding: 5px !important;
+  border: 1px solid #CFCFCF !important;
+}
+
+label.shortcutKey2URL-keyListPanel-key {
+  padding: 2px;
+  color: #FFFFFF
+}
+label.shortcutKey2URL-keyListPanel-name {
+  padding: 2px 8px 2px 0px;
+  color: #BFBFBF
+}

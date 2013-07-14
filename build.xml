@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="xpi" default="build">
+  <property name="project" value="shortcutkey2url"/>
+  <property name="build" value="./build"/>
+
+  <target name="build">
+    <xmlproperty file="install.rdf" collapseAttributes="true" />
+
+    <delete>
+      <fileset dir="." includes="${project}-*.xpi"/>
+    </delete>
+    <delete dir="${build}" />
+    <mkdir dir="${build}" />
+
+    <copy todir="${build}">
+      <fileset dir=".">
+        <include name="components/**" />
+        <include name="defaults/**" />
+        <include name="chrome/**" />
+
+        <include name="chrome.manifest" />
+        <include name="install.rdf" />
+
+        <!--<exclude name="chrome/content/test/**" />-->
+      </fileset>
+    </copy>
+
+    <zip destfile="${build}/chrome/${project}.jar" basedir="${build}/chrome" />
+    <delete includeEmptyDirs="true">
+      <fileset dir="${build}/chrome" includes="**" excludes="${project}.jar" />
+    </delete>
+    <replace file="${build}/chrome.manifest" token="chrome/" value="jar:chrome/${project}.jar!/" />
+
+    <zip destfile="${project}-${RDF.Description.em:version}.xpi" basedir="build" />
+
+    <!--<delete dir="build" />-->
+  </target>
+</project>

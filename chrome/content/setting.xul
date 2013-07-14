@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://shortcutkey2url/skin/setting.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM 'chrome://shortcutkey2url/locale/settings.dtd'>
+
+<dialog buttons="accept, cancel" id="shortcutKey2URL-settingDialog" ondialogaccept="update();" ondialogcancel="return cancel();" onload="init();" title="&s2u.dialog.setting.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="./json2.js" />
+  <script type="application/x-javascript" src="./setting.js" />
+
+  <groupbox>
+    <caption label="&s2u.caption.general;" />
+    <hbox align="center">
+      <label control="startupKey" value="&s2u.label.startup.key;" />
+      <textbox id="startupKey" size="20" onclick="this.select();" onkeypress="inputStartupKey(event);" />
+      <description id="startupKeyDuplicate" class="warn">&s2u.description.warnning;</description>
+    </hbox>
+    <hbox align="center">
+      <label control="numberOfCharacters" value="&s2u.label.characters.number;" />
+      <textbox id="numberOfCharacters" size="2" onclick="this.select();" onkeypress="inputNumberOfCharacters(event);" />
+    </hbox>
+    <checkbox id="showIcon" label="&s2u.label.show.icon;" />
+    <checkbox id="showList" label="&s2u.label.show.list;" />
+  </groupbox>
+  <groupbox>
+    <caption label="&s2u.caption.mapping;" />
+    <tree id="treeView" flex="1" seltype="single" enableColumnDrag="true" onselect="selectTree();" onkeypress="keypressMappingList(event);">
+      <treecols>
+        <treecol id="keyColumn" label="&s2u.treecol.key;" flex="1" persist="width ordinal hidden" />
+        <splitter class="tree-splitter" />
+        <treecol id="nameColumn" label="&s2u.treecol.name;" flex="2" persist="width ordinal hidden" />
+        <splitter class="tree-splitter" />
+        <treecol id="urlColumn" label="&s2u.treecol.url;" flex="3" persist="width ordinal hidden" />
+        <splitter class="tree-splitter" />
+        <treecol id="openMethodColumn" label="&s2u.treecol.open.method;" flex="2" persist="width ordinal hidden" />
+      </treecols>
+      <treechildren ondblclick="edit();" />
+    </tree>
+    <hbox>
+      <button label="&s2u.button.add;" oncommand="add();" />
+      <button label="&s2u.button.edit;" oncommand="edit();" disabled="true" id="editButton" />
+      <button label="&s2u.button.delete;" oncommand="del();" disabled="true" id="deleteButton" />
+    </hbox>
+  </groupbox>
+  <groupbox>
+    <caption label="&s2u.caption.export.import;" />
+    <hbox>
+      <button label="&s2u.button.export;" oncommand="exportSettings();" />
+      <button label="&s2u.button.import;" oncommand="importSettings();" />
+    </hbox>
+  </groupbox>
+
+</dialog>

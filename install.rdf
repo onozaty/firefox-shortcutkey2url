@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+
+    <em:id>shortcutkey2url@enjoyxstudy.com</em:id>
+    <em:type>2</em:type>
+    <em:version>2.2.1</em:version>
+
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>2.0</em:minVersion>
+        <em:maxVersion>3.6a1pre</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+
+    <em:name>ShortcutKey2URL</em:name>
+    <em:description>Open URL with the shortcut key.</em:description>
+    <em:creator>onozaty</em:creator>
+    <em:homepageURL>http://www.enjoyxstudy.com/firefox/extension/shortcutkey2url/</em:homepageURL>
+    <em:optionsURL>chrome://shortcutkey2url/content/setting.xul</em:optionsURL>
+    <em:iconURL>chrome://shortcutkey2url/skin/icon-large.png</em:iconURL>
+  </Description>
+
+</RDF>

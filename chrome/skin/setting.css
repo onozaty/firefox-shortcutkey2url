@@ -1,0 +1,23 @@
+treechildren::-moz-tree-checkbox(checked) {
+  list-style-image: url(chrome://global/skin/checkbox/cbox-check.gif);
+}
+
+tree {
+  height:20em;
+  width:50em;
+}
+
+button {
+  margin: 4px;
+}
+
+.warn  {
+}
+
+label[control="startupKey"], label[control="numberOfCharacters"] {
+  width: 14em;
+}
+
+textbox *|input {
+  ime-mode: disabled;
+}

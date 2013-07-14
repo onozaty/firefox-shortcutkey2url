@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://shortcutkey2url/skin/overlay.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM 'chrome://shortcutkey2url/locale/browser.dtd'>
+
+<overlay id="shortcutkey2url_overlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <hbox id="urlbar-icons">
+    <image id="shortcutKey2URL-addressbarIcon"
+      insertbefore="feed-button"
+      onclick="gShortcutKey2URL.createShortcutKeyThisPage();"
+      tooltiptext="&s2u.addressbar.tooltiptext;"
+      src="chrome://shortcutkey2url/skin/icon-small-inactive.png"/>
+    <button id="shortcutKey2URL-dummyButton" style="display:none;" />
+  </hbox>
+
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="shortcutKey2URL-settingMenu"
+      label="&s2u.menuitem.label;"
+      insertbefore="sanitizeSeparator"
+      oncommand="gShortcutKey2URL.openSetting();" />
+  </menupopup>
+
+  <menupopup id="contentAreaContextMenu">
+    <menuitem id="shortcutKey2URL-contextMenu-page"
+      label="&s2u.contextmenu.page.label;"
+      oncommand="gShortcutKey2URL.createShortcutKeyThisPage();" />
+    <menuitem id="shortcutKey2URL-contextMenu-link"
+      label="&s2u.contextmenu.link.label;"
+      oncommand="gShortcutKey2URL.createShortcutKeyContextLink();" />
+  </menupopup>
+
+  <window id="main-window">
+    <menupopup id="shortcutKey2URL-keyListPanel" ignorekeys="true" noautofocus="true" noautohide="true" 
+      onpopuphiding="gShortcutKey2URL.endKeyReceive();" />
+    <iframe id="shortcutKey2URL-dummyFrame"
+      src="chrome://shortcutkey2url/content/dummy.xul" style="width:0px" collapsed="true"/>
+  </window>
+
+  <script type="application/x-javascript" src="./shortcutkey2url.js" />
+</overlay>

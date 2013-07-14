@@ -1,0 +1,13 @@
+<!ENTITY s2u.dialog.add.shortcutkey "Ajouter - ShortcutKey2URL">
+<!ENTITY s2u.label.key "Touche">
+<!ENTITY s2u.label.name "Nom">
+<!ENTITY s2u.label.url "Adresse (URL)">
+<!ENTITY s2u.label.open.method "Mode d'ouverture">
+<!ENTITY s2u.menuitem.search.openedtab "Rechercher l'onglet précédemment ouvert">
+<!ENTITY s2u.menuitem.search "Chercher">
+<!ENTITY s2u.menuitem.new.tab "Nouvel onglet">
+<!ENTITY s2u.menuitem.new "Nouvel onglet">
+<!ENTITY s2u.menuitem.selected.tab "Onglet sélectionné">
+<!ENTITY s2u.menuitem.selected "Onglet sélectionné">
+<!ENTITY s2u.dialog.edit.shortcutkey "Éditer - ShortcutKey2URL">
+
