@@ -21,14 +21,8 @@
         <include name="chrome.manifest" />
         <include name="install.rdf" />
 
-        <!--<exclude name="chrome/content/test/**" />-->
       </fileset>
     </copy>
-
-    <zip destfile="${build}/chrome/${project}.jar" basedir="${build}/chrome" />
-    <delete includeEmptyDirs="true">
-      <fileset dir="${build}/chrome" includes="**" excludes="${project}.jar" />
-    </delete>
 
     <zip destfile="${project}-${RDF.Description.em:version}.xpi" basedir="build" />
 
