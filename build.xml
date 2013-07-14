@@ -20,6 +20,7 @@
 
         <include name="chrome.manifest" />
         <include name="install.rdf" />
+        <include name="bootstrap.js" />
 
       </fileset>
     </copy>
