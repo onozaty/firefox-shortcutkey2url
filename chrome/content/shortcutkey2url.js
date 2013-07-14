@@ -274,8 +274,17 @@ var gShortcutKey2URL = {
   loadSetting: function() {
 
     try {
-      var settingDataStr = gShortcutKey2URL.prefBranch.getCharPref('settingData');
-      gShortcutKey2URL.settingData = eval(settingDataStr);
+      if (gShortcutKey2URL.prefBranch.prefHasUserValue('settingData')) {
+
+        var settingDataStr = gShortcutKey2URL.prefBranch.getCharPref('settingData');
+        gShortcutKey2URL.settingData = eval(settingDataStr);
+
+      } else {
+
+        // install default
+        gShortcutKey2URL.settingData = this.defaultSettingData;
+        gShortcutKey2URL.prefBranch.setCharPref('settingData', gShortcutKey2URL.settingData.toSource());
+      }
     } catch(e){
       gShortcutKey2URL.settingData = [];
     }
@@ -303,7 +312,7 @@ var gShortcutKey2URL = {
     try {
       gShortcutKey2URL.isShowListOfShortcutKey = gShortcutKey2URL.prefBranch.getBoolPref('showListOfShortcutKey');
     } catch(e) {
-      gShortcutKey2URL.isShowListOfShortcutKey = false;
+      gShortcutKey2URL.isShowListOfShortcutKey = true;
     }
 
     try {
@@ -399,10 +408,7 @@ var gShortcutKey2URL = {
 
     var contextMenu = document.getElementById('contentAreaContextMenu');
     contextMenu.removeEventListener('popupshowing', gShortcutKey2URL.handleContextMenu, false);
-  }
+  },
+
+  defaultSettingData:[{"key":"B","name":"Google Translate(javascript sample)","url":"javascript:var%20t=((window.getSelection&&window.getSelection())||(document.getSelection&&document.getSelection())||(document.selection&&document.selection.createRange&&document.selection.createRange().text));var%20e=(document.charset||document.characterSet);if(t!=''){location.href='http://translate.google.com/?text='+t+'&hl=ja&langpair=auto|en&tbb=1&ie='+e;}else{location.href='http://translate.google.com/translate?u='+encodeURIComponent(location.href)+'&hl=ja&langpair=auto|en&tbb=1&ie='+e;};","openMethod":"search"},{"key":"C","name":"Close All Tabs(chromescript sample)","url":"chromescript:gBrowser.removeAllTabsBut(gBrowser.addTab('about:blank'));","openMethod":"search"},{"key":"F","name":"Facebook","url":"https://www.facebook.com/","openMethod":"search"},{"key":"G","name":"Gmail","url":"https://mail.google.com/","openMethod":"search"},{"key":"T","name":"Twitter","url":"http://twitter.com/","openMethod":"search"}]
 };
-
-window.addEventListener('load', function() {
-  gShortcutKey2URL.init();
-}, false);
-
