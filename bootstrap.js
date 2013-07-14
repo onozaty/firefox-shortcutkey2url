@@ -2,12 +2,13 @@ const Cc = Components.classes;
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
-var WindowWatcher  = Cc["@mozilla.org/embedcomp/window-watcher;1"].getService(Ci.nsIWindowWatcher);
-var WindowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
-var PromptService  = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService);
-var PrefService    = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
-var BundleService  = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
-var BundleService  = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
+var WindowWatcher     = Cc["@mozilla.org/embedcomp/window-watcher;1"].getService(Ci.nsIWindowWatcher);
+var WindowMediator    = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+var PromptService     = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService);
+var PrefService       = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
+var BundleService     = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
+var IOService         = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+var StyleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
 
 var bundleString = BundleService.createBundle("chrome://shortcutkey2url/locale/browser.properties");
 
@@ -49,8 +50,6 @@ function finalizeWindow(aWindow) {
   removeElement(aWindow, CONTEXT_MENU_LINK_ELEMENT_ID);
   removeElement(aWindow, KEY_LIST_PANEL_ELEMENT_ID);
   removeElement(aWindow, DUMMY_FRAME_ELEMENT_ID);
-
-  removeElement(aWindow, SCRIPT_ELEMENT_ID);
 }
 
 function removeElement(aWindow, id) {
@@ -178,6 +177,9 @@ function initializeScript(aWindow) {
 
 function startup(aData, aReason) {
 
+  var cssUrl = IOService.newURI("chrome://shortcutkey2url/skin/overlay.css", null, null);
+  StyleSheetService.loadAndRegisterSheet(cssUrl, StyleSheetService.USER_SHEET);
+
   var browserWindows = WindowMediator.getEnumerator("navigator:browser");
   while (browserWindows.hasMoreElements()) {
     let win = browserWindows.getNext().QueryInterface(Ci.nsIDOMWindow);
@@ -189,6 +191,9 @@ function startup(aData, aReason) {
 
 function shutdown(aData, aReason) {
 
+  var cssUrl = IOService.newURI("chrome://shortcutkey2url/skin/overlay.css", null, null);
+  StyleSheetService.unregisterSheet(cssUrl, StyleSheetService.USER_SHEET);
+
   var browserWindows = WindowMediator.getEnumerator("navigator:browser");
   while (browserWindows.hasMoreElements()) {
     let win = browserWindows.getNext().QueryInterface(Ci.nsIDOMWindow);
@@ -198,6 +203,8 @@ function shutdown(aData, aReason) {
   WindowWatcher.unregisterNotification(windowObserver);
   windowObserver = null;
   WindowWatcher = null;
+
+  //PromptService.alert(null, "debug", "shutdown finished");
 }
 
 function install(aData, aReason) {}
