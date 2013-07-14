@@ -4,5 +4,3 @@ locale   shortcutkey2url  en-US  chrome/locale/en-US/
 locale   shortcutkey2url  fr-FR  chrome/locale/fr-FR/
 
 skin     shortcutkey2url  classic/1.0  chrome/skin/
-
-overlay  chrome://browser/content/browser.xul  chrome://shortcutkey2url/content/browser_overlay.xul

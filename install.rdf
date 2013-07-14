@@ -7,7 +7,8 @@
 
     <em:id>shortcutkey2url@enjoyxstudy.com</em:id>
     <em:type>2</em:type>
-    <em:version>2.2.1</em:version>
+    <em:version>3.0.0</em:version>
+    <em:bootstrap>true</em:bootstrap>
 
     <em:targetApplication>
       <Description>
