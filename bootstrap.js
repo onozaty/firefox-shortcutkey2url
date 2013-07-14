@@ -136,7 +136,7 @@ function initializeContextMenu(aWindow) {
   linkMenuitem.setAttribute("label", bundleString.GetStringFromName("s2u.contextmenu.link.label"));
 
   linkMenuitem.addEventListener("command", function() {
-    aWindow.gShortcutKey2URL.createShortcutKeyThisLink();
+    aWindow.gShortcutKey2URL.createShortcutKeyContextLink();
   }, false);
 
   menu.appendChild(linkMenuitem);
