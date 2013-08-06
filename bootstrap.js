@@ -178,6 +178,53 @@ function initializeScript(aWindow) {
   aWindow.gShortcutKey2URL.init();
 }
 
+// migration
+function migration(prefBranch, beforeDataVersion) {
+
+  try {
+    if (prefBranch.prefHasUserValue('settingData')) {
+
+      var settingDataStr = prefBranch.getCharPref('settingData');
+
+//PromptService.alert(null, "debug", "settingDataStr:" + settingDataStr);
+
+      // migration
+      settingDataStr = settingDataStr.replace(
+                         /{key:"(.*?)", name:"(.*?)", url:"(.*?)", openMethod:"(.*?)"}/g,
+                         "{\"key\":\"$1\", \"name\":\"$2\", \"url\":\"$3\", \"openMethod\":\"$4\"}");
+
+//PromptService.alert(null, "debug", "settingDataStr after:" + settingDataStr);
+
+      setUnicodeStringPref(prefBranch, 'settingData', settingDataStr);
+    }
+  } catch(e) {}
+
+  try {
+    var startupKeyStr = prefBranch.getCharPref('startupKey');
+
+    // migration
+    startupKeyStr = startupKeyStr.replace(
+                       /{modifiers:"(.+?)", key:"(.+?)"}/,
+                       "{\"modifiers\":\"$1\", \"key\":\"$2\"}");
+
+    setUnicodeStringPref(prefBranch, 'startupKey', startupKeyStr);
+  } catch(e) {}
+
+}
+
+function setUnicodeStringPref(prefBranch, prefName, value) {
+
+  var ustr = Cc['@mozilla.org/supports-string;1'].createInstance(Ci.nsISupportsString);
+  ustr.data = value;
+
+  prefBranch.setComplexValue(prefName, Ci.nsISupportsString, ustr);
+}
+
+function getUnicodeStringPref(prefBranch, prefName) {
+
+  return prefBranch.getComplexValue(prefName, Ci.nsISupportsString).data;
+}
+
 
 function startup(aData, aReason) {
 
@@ -208,8 +255,28 @@ function shutdown(aData, aReason) {
   windowObserver = null;
   WindowWatcher = null;
 
-  //PromptService.alert(null, "debug", "shutdown finished");
 }
 
-function install(aData, aReason) {}
+const DATA_VERSION = 1;
+
+function install(aData, aReason) {
+
+  var prefBranch = PrefService.getBranch('extensions.shortcutkey2url.');
+
+  var beforeDataVersion = 0;
+  if (prefBranch.prefHasUserValue('dataVersion')) {
+
+    beforeDataVersion = prefBranch.getIntPref('dataVersion');
+  }
+
+//PromptService.alert(null, "debug", "beforeDataVersion:" + beforeDataVersion);
+
+  if (beforeDataVersion != DATA_VERSION) {
+
+    migration(prefBranch, beforeDataVersion);
+  }
+
+  prefBranch.setIntPref('dataVersion', DATA_VERSION);
+}
+
 function uninstall(aData, aReason) {}

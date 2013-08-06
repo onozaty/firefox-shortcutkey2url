@@ -42,7 +42,7 @@ var initView = function(settings) {
 
   document.getElementById('showList').checked = settings.isShowListOfShortcutKey;
 
-  gTreeView._cycleHeader(document.getElementById('keyColumn'));
+  gTreeView._setHeader(document.getElementById('keyColumn'), 'ascending');
 }
 
 var cloneArray = function(src) {
@@ -411,7 +411,10 @@ TreeView.prototype = {
         break;
     }
 
-    // reset
+    this._setHeader(elm, sortDir);
+  },
+  _setHeader: function(elm, sortDir) {
+
     document.getElementById('keyColumn').setAttribute('sortDirection', 'natural');
     document.getElementById('urlColumn').setAttribute('sortDirection', 'natural');
     document.getElementById('nameColumn').setAttribute('sortDirection', 'natural');

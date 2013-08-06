@@ -5,7 +5,6 @@
 
 <dialog buttons="accept, cancel" id="shortcutKey2URL-settingDialog" ondialogaccept="update();" ondialogcancel="return cancel();" onload="init();" title="&s2u.dialog.setting.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/x-javascript" src="./json2.js" />
   <script type="application/x-javascript" src="./setting.js" />
 
   <groupbox>

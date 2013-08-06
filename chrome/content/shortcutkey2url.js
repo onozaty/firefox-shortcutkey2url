@@ -276,14 +276,13 @@ var gShortcutKey2URL = {
     try {
       if (gShortcutKey2URL.prefBranch.prefHasUserValue('settingData')) {
 
-        var settingDataStr = gShortcutKey2URL.prefBranch.getCharPref('settingData');
-        gShortcutKey2URL.settingData = eval(settingDataStr);
-
+        var settingDataStr = gShortcutKey2URL.getUnicodeStringPref('settingData');
+        gShortcutKey2URL.settingData = JSON.parse(settingDataStr);
       } else {
 
         // install default
-        gShortcutKey2URL.settingData = this.defaultSettingData;
-        gShortcutKey2URL.prefBranch.setCharPref('settingData', gShortcutKey2URL.settingData.toSource());
+        gShortcutKey2URL.settingData = gShortcutKey2URL.defaultSettingData;
+        gShortcutKey2URL.setUnicodeStringPref('settingData', JSON.stringify(gShortcutKey2URL.settingData));
       }
     } catch(e){
       gShortcutKey2URL.settingData = [];
@@ -291,8 +290,8 @@ var gShortcutKey2URL = {
     gShortcutKey2URL.sortSettingData(gShortcutKey2URL.settingData);
 
     try {
-      var startupKeyStr = gShortcutKey2URL.prefBranch.getCharPref('startupKey');
-      gShortcutKey2URL.startupKey = eval(startupKeyStr);
+      var startupKeyStr = gShortcutKey2URL.getUnicodeStringPref('startupKey');
+      gShortcutKey2URL.startupKey = JSON.parse(startupKeyStr);
     } catch(e) {
       gShortcutKey2URL.startupKey = {modifiers: 'control', key: 'Q'};
     }
@@ -324,12 +323,25 @@ var gShortcutKey2URL = {
 
   saveSetting: function() {
     gShortcutKey2URL.sortSettingData(gShortcutKey2URL.settingData);
-    gShortcutKey2URL.prefBranch.setCharPref('settingData', gShortcutKey2URL.settingData.toSource());
-    gShortcutKey2URL.prefBranch.setCharPref('startupKey', gShortcutKey2URL.startupKey.toSource());
+    gShortcutKey2URL.setUnicodeStringPref('settingData', JSON.stringify(gShortcutKey2URL.settingData));
+    gShortcutKey2URL.setUnicodeStringPref('startupKey', JSON.stringify(gShortcutKey2URL.startupKey));
     gShortcutKey2URL.prefBranch.setIntPref('receiveCharNumber', gShortcutKey2URL.receiveCharNumber);
     gShortcutKey2URL.prefBranch.setBoolPref('showIconInAddressBar', gShortcutKey2URL.isShowIconInAddressBar);
     gShortcutKey2URL.prefBranch.setBoolPref('showListOfShortcutKey', gShortcutKey2URL.isShowListOfShortcutKey);
     gShortcutKey2URL.prefBranch.setIntPref('receiveActiveTime', gShortcutKey2URL.receiveActiveTime);
+  },
+
+  setUnicodeStringPref: function(prefName, value) {
+
+    var ustr = Cc['@mozilla.org/supports-string;1'].createInstance(Ci.nsISupportsString);
+    ustr.data = value;
+
+    gShortcutKey2URL.prefBranch.setComplexValue(prefName, Ci.nsISupportsString, ustr);
+  },
+
+  getUnicodeStringPref: function(prefName) {
+
+    return gShortcutKey2URL.prefBranch.getComplexValue(prefName, Ci.nsISupportsString).data;
   },
 
   sortSettingData: function(settingData) {
