@@ -70,7 +70,7 @@ var gShortcutKey2URL = {
 
       case (aUrl.indexOf('chromescript:') == 0):
         // chromescript
-        eval('(function(){' + aUrl.substring('chromescript:'.length) + '})()');
+        (new Function(aUrl.substring('chromescript:'.length)))();
         break;
 
       default:
