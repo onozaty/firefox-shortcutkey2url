@@ -84,3 +84,8 @@ document.addEventListener('keypress', (e) => {
 chrome.runtime.sendMessage({target: 'background-handler', name: MessageName.STARTUP}, (response) => {
   render(response.shortcutKeys, response.listColumnCount);
 });
+
+// popup is not focused problem
+setTimeout(() => {
+  window.focus();
+}, 100)
