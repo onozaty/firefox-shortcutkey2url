@@ -1,6 +1,9 @@
+body {
+  margin: 10px 10px 0 10px;
+}
+
 #shortcutKeys div.column {
-  break-inside: avoid;
-  break-after: column;
+  page-break-inside: avoid;
 }
 
 #shortcutKeys div.item {

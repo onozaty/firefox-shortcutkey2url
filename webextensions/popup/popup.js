@@ -15,12 +15,17 @@ function render(shortcutKeys, listColumnCount) {
     columns.push(column);
   }
 
-  for (var i = 0; i < shortcutKeys.length; i++) {
+  var createItemCount = Math.ceil(shortcutKeys.length / listColumnCount) * listColumnCount;
+  for (var i = 0; i < createItemCount; i++) {
     columns[i % listColumnCount].appendChild(createShortcutKeyElement(shortcutKeys[i], keyMaxLength));
   }
 }
 
 function createShortcutKeyElement(shortcutKey, keyMaxLength) {
+
+  if (!shortcutKey) {
+    shortcutKey = {key: '', title: ''};
+  }
 
   const keyElement = document.createElement('span');
   keyElement.className = 'key';
