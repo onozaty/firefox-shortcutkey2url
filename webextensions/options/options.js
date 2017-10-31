@@ -75,10 +75,18 @@ class ShortcutKey {
   }
 
   _keypressInputKey(event) {
-    if (event.charCode) {
+
+    if (event.keyCode == KeyEvent.DOM_VK_DELETE) {
+      event.target.value = '';
+    } else if (event.charCode) {
       event.target.value += String.fromCharCode(event.charCode).toUpperCase();
     }
-    return false;
+    
+    if (event.keyCode != KeyEvent.DOM_VK_TAB
+        && event.keyCode != KeyEvent.DOM_VK_RETURN
+        && event.keyCode != KeyEvent.DOM_VK_BACK_SPACE) {
+      return false;
+    }
   }
 
   _switchInputContent() {

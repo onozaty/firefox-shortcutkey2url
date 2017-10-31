@@ -46,6 +46,10 @@ h1 {
   width: 200px;
 }
 
+input[name="key"] {
+  ime-mode: disabled;
+}
+
 #shortcutKeys .panel-title {
   font-size: inherit;
 }
