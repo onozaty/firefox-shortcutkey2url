@@ -49,6 +49,13 @@ Settings.newAsync().then((settings) => {
           });
         });
         return;
+
+      case 'background-content-event':
+
+        if (KeyEventUtil.toString(message.value) == settings.startupContentKey()) {
+          browser.browserAction.openPopup();
+        }
+        return;
     }
   });
 });

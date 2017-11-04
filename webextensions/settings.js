@@ -21,6 +21,7 @@ class Settings {
     return {
       shortcutKeys: this._shortcutKeys,
       listColumnCount: this._listColumnCount,
+      startupContentKey: this._startupContentKey,
       startupCommand: this._startupCommand
     };
   }
@@ -33,9 +34,14 @@ class Settings {
     return this._listColumnCount;
   }
 
+  startupContentKey() {
+    return this._startupContentKey;
+  }
+
   async update(settings) {
     this._shortcutKeys = settings.shortcutKeys.sort(Settings.shortcutKeyCompare);
     this._listColumnCount = settings.listColumnCount;
+    this._startupContentKey = settings.startupContentKey;
     await this._save();
   }
 
@@ -51,9 +57,10 @@ class Settings {
 
   async _load() {
     var loaded =  await getLocalStorage('settings');
-    var loaded = loaded || {};
+    loaded = loaded || {};
     this._shortcutKeys = (loaded.shortcutKeys || DEFAULT_SHORTCUTKEYS).sort(Settings.shortcutKeyCompare);
     this._listColumnCount = loaded.listColumnCount || DEFAULT_LIST_COLUMN_COUNT;
+    this._startupContentKey = loaded.startupContentKey;
     this._startupCommand = (await getAllCommands())[0];
   }
 
@@ -61,7 +68,8 @@ class Settings {
     await setLocalStorage({
       settings: {
         shortcutKeys: this._shortcutKeys,
-        listColumnCount: this._listColumnCount
+        listColumnCount: this._listColumnCount,
+        startupContentKey: this._startupContentKey
       }
     });
   }

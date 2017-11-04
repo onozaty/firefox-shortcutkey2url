@@ -28,15 +28,19 @@ h1 {
   margin-bottom: 0px;
 }
 
-#startupKey {
+#mainStartupKey, #secondStartupKey {
   font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;
   width: 200px;
 }
-#startupKey[disabled] {
+#mainStartupKey[disabled] {
   background-color: #fbfbfb;
 }
 
-#startupKeyHelp, #columnCountHelp {
+#secondStartupKey {
+  ime-mode: disabled;
+}
+
+.description-message {
   font-size: 90%;
   margin-left: 5px;
   margin-bottom: 0px;

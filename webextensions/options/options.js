@@ -292,7 +292,10 @@ class ShortcutKeys {
 }
 
 function startup(settings) {
-  $('#startupKey').val(settings.startupCommand.shortcut);
+  $('#mainStartupKey').val(settings.startupCommand.shortcut);
+
+  const $secondStartupKey = $('#secondStartupKey');
+  $secondStartupKey.val(settings.startupContentKey);
 
   const $inputColumnCount = $('#inputColumnCount');
   $inputColumnCount.val(settings.listColumnCount);
@@ -326,7 +329,8 @@ function startup(settings) {
         name: 'save',
         settings: {
           shortcutKeys: shortcutKeys.data(),
-          listColumnCount: parseInt($inputColumnCount.val(), 10)
+          listColumnCount: parseInt($inputColumnCount.val(), 10),
+          startupContentKey: $secondStartupKey.val()
         }
       };
       chrome.runtime.sendMessage(request, () => {
@@ -337,10 +341,20 @@ function startup(settings) {
     }
   });
 
-  $("#errorMessage, #successMessage").find('.close')
+  $('#errorMessage, #successMessage').find('.close')
     .on('click', (event) => {
       $(event.target).parent().hide();
-  });
+    });
+
+  $('#secondStartupKey').on('keypress', (event) => {
+    event.target.value = '';
+
+    if (KeyEventUtil.hasModifiers(event)) {
+      event.target.value = KeyEventUtil.toString(event);
+    }
+
+    return false;
+  })
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log(message);

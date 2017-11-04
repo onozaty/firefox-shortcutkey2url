@@ -3,15 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>ShortcutKey2URL</title>
-
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="options.css" rel="stylesheet">
   </head>
-
   <body>
-
     <!-- Begin page content -->
     <div class="container">
       <h1>ShortcutKey2URL</h1>
@@ -20,7 +16,7 @@
         <p>There is an input error. Please check the input contents.</p>
       </div>
       <div id="successMessage" class="alert alert-success" style="display:none">
-        <a class="close">×</a> 
+        <a class="close">×</a>
         <p>Settings saved!</p>
       </div>
       <div class="panel panel-default">
@@ -28,10 +24,17 @@
         <div class="panel-body">
           <form class="form-horizontal">
             <div class="form-group form-group-sm">
-              <label class="col-sm-2 control-label">Startup key</label>
+              <label class="col-sm-2 control-label">Main startup key</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="startupKey" disabled>
-                <span id="startupKeyHelp" class="help-block">You can change the startup key at 'Keyboard shortcuts' on the extensions screen (Menu > More tools > Extensions).</span>
+                <input type="text" class="form-control" id="mainStartupKey" disabled>
+                <span class="help-block description-message">This is the browser shortcuts. It can not be changed in the current Firefox.</span>
+              </div>
+            </div>
+            <div class="form-group form-group-sm">
+              <label class="col-sm-2 control-label">Second startup key</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="secondStartupKey">
+                <span class="help-block description-message">Use the content script. It does not work on some special pages.</span>
               </div>
             </div>
             <div class="form-group form-group-sm">
@@ -44,7 +47,7 @@
                   <option value="4">4</option>
                   <option value="5">5</option>
                 </select>
-                <span id="columnCountHelp" class="help-block">The number of columns in the shortcut key list displayed in the popup.</span>
+                <span class="help-block description-message">The number of columns in the shortcut key list displayed in the popup.</span>
               </div>
             </div>
           </form>
@@ -128,6 +131,7 @@
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="../actions.js"></script>
+    <script src="../utils.js"></script>
     <script src="options.js"></script>
   </body>
 </html>
