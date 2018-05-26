@@ -40,10 +40,12 @@ function createShortcutKeyElement(shortcutKey, keyMaxLength) {
 
 document.getElementById('add').addEventListener('click', () => {
   chrome.runtime.sendMessage({target: 'background-options', name: 'add'});
+  window.close();
 });
 
 document.getElementById('options').addEventListener('click', () => {
   chrome.runtime.openOptionsPage();
+  window.close();
 });
 
 document.addEventListener('keypress', (e) => {
