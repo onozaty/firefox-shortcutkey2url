@@ -292,7 +292,23 @@ class ShortcutKeys {
 }
 
 function startup(settings) {
-  $('#startupKey').val(settings.startupCommand.shortcut);
+  const $startupKey = $('#startupKey');
+  $startupKey.val(settings.startupCommand.shortcut);
+
+  const $changeShortcutsDialog = $('#changeShortcutsDialog');
+  $('#changeShortcutsButton').on('click', () => {
+
+    $changeShortcutsDialog.modal();
+
+    ShortcutCustomizeUI.build().then(list => {
+      $('#shortcuts').empty().append(list);
+    });
+  });
+  $changeShortcutsDialog.on('hidden.bs.modal', () => {
+    chrome.commands.getAll((commands) => {
+      $startupKey.val(commands[0].shortcut);
+    }); 
+  });
 
   const $inputColumnCount = $('#inputColumnCount');
   $inputColumnCount.val(settings.listColumnCount);
