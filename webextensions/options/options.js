@@ -300,7 +300,9 @@ function startup(settings) {
 
     $changeShortcutsDialog.modal();
 
-    ShortcutCustomizeUI.build().then(list => {
+    ShortcutCustomizeUI.build({
+      showDescriptions: false
+    }).then(list => {
       $('#shortcuts').empty().append(list);
     });
   });
