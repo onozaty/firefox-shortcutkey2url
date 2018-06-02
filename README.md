@@ -1,6 +1,6 @@
 ﻿# ShortcutKey2URL for Firefox WebExtensions
 
-ShortcutKey2URL for Firefox WebExtensions is an extension for Firefox that provides a way to easy access to frequently visit sites with shortcut key. I released WebExtensions version in Firefox 60.
+ShortcutKey2URL for Firefox WebExtensions is an extension that allows you to open, and move url using shortcut keys. You can also run JavaScript.
 
 Display the action list with the startup key and execute the action with the next key.
 
@@ -15,6 +15,8 @@ The items that can be set as actions are as follows.
 * Open URL in current tab.
 * Execute the JavaScript on the current tab.
 * Open URL as a new tab and then execute the JavaScript.
+
+I released WebExtensions version in Firefox 60.
 
 ## Installation
 
