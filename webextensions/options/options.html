@@ -29,9 +29,9 @@
           <form class="form-horizontal">
             <div class="form-group form-group-sm">
               <label class="col-sm-2 control-label">Startup key</label>
-              <div class="col-sm-10 form-inline">
+              <div class="col-sm-10">
                 <input type="text" class="form-control" id="startupKey" disabled>
-                <button type="button" class="btn btn-default btn-sm" id="changeShortcutsButton">Change extension shortcuts</button>
+                <span id="startupKeyHelp" class="help-block">You can change the startup key at 'Manage Extension Shortcuts' on the add-ons screen (Menu > Add-ons > Manage Extension Shortcuts).</span>
               </div>
             </div>
             <div class="form-group form-group-sm">
@@ -121,28 +121,10 @@
         </form>
       </div>
     </div>
-    <div class="modal" id="changeShortcutsDialog" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Change extension shortcuts</h4>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <label class="col-sm-3">Startup key</label>
-                <div class="col-sm-9">
-                  <div id="shortcuts"></div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
   
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="lib/ShortcutCustomizeUI.js"></script>
     <script src="lib/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="../actions.js"></script>
