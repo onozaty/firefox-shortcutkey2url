@@ -108,6 +108,11 @@ class Handler {
 
   _executeScript(script) {
     if (script && script.trim() != '') {
+
+      if (script.startsWith('javascript:')) {
+        script = decodeURIComponent(script.substring('javascript:'.length));
+      }
+
       chrome.tabs.executeScript(null, {code: script});
     }
   }
