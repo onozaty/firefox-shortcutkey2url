@@ -81,8 +81,3 @@ h1 {
 #shortcutKeys .panel-body .optional {
   margin-left: 5px;
 }
-
-.key-combination label, .key-combination input {
-  margin: 0 3px;
-  font-weight: normal;
-}

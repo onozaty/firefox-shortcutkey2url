@@ -295,23 +295,6 @@ function startup(settings) {
   const $startupKey = $('#startupKey');
   $startupKey.val(settings.startupCommand.shortcut);
 
-  const $changeShortcutsDialog = $('#changeShortcutsDialog');
-  $('#changeShortcutsButton').on('click', () => {
-
-    $changeShortcutsDialog.modal();
-
-    ShortcutCustomizeUI.build({
-      showDescriptions: false
-    }).then(list => {
-      $('#shortcuts').empty().append(list);
-    });
-  });
-  $changeShortcutsDialog.on('hidden.bs.modal', () => {
-    chrome.commands.getAll((commands) => {
-      $startupKey.val(commands[0].shortcut);
-    }); 
-  });
-
   const $inputColumnCount = $('#inputColumnCount');
   $inputColumnCount.val(settings.listColumnCount);
 

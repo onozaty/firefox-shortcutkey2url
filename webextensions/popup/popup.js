@@ -15,12 +15,18 @@ function render(shortcutKeys, listColumnCount) {
     columns.push(column);
   }
 
-  for (var i = 0; i < shortcutKeys.length; i++) {
+  for (var i = 0, length = Math.ceil(shortcutKeys.length / listColumnCount) * listColumnCount; i < length; i++) {
     columns[i % listColumnCount].appendChild(createShortcutKeyElement(shortcutKeys[i], keyMaxLength));
   }
 }
 
 function createShortcutKeyElement(shortcutKey, keyMaxLength) {
+
+  if (!shortcutKey) {
+    const emptyElement = document.createElement('div');
+    emptyElement.textContent = '\u00A0';
+    return emptyElement;
+  }
 
   const keyElement = document.createElement('span');
   keyElement.className = 'key';
@@ -34,6 +40,10 @@ function createShortcutKeyElement(shortcutKey, keyMaxLength) {
   shortcutKeyElement.className = 'item';
   shortcutKeyElement.appendChild(keyElement);
   shortcutKeyElement.appendChild(titleElement);
+  shortcutKeyElement.addEventListener('click', () => {
+    chrome.runtime.sendMessage({target: 'background-handler', name: MessageName.CLICK_EVENT, value: shortcutKey});
+    window.close();
+  })
 
   return shortcutKeyElement;
 }
