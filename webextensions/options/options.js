@@ -329,8 +329,13 @@ function startup(settings) {
       reader.onload = (e) => {
         const fileContents = e.target.result;
 
-        const importShortcutKeys = JSON.parse(fileContents);
-        importShortcutKeys.forEach((shortcutKey) => shortcutKeys.append(shortcutKey));
+        try {
+          const importShortcutKeys = JSON.parse(fileContents);
+          importShortcutKeys.forEach((shortcutKey) => shortcutKeys.append(shortcutKey));
+        } catch (error) {
+          console.log(error);
+          alert('Could not import due to invalid format.');
+        }
       }
       reader.readAsText(file);
     }, false);
