@@ -23,3 +23,10 @@ I released WebExtensions version in Firefox 60.
 Install from the following.
 
 * [ShortcutKey2URL \(WebExtensions\) \- Add\-ons for Firefox](https://addons.mozilla.org/en-US/firefox/addon/shortcutkey2url/)
+
+## Usage
+
+Since it is same to Chrome version, please refer to the following.
+
+* [chrome\-shortcutkey2url/README\.md at master · onozaty/chrome\-shortcutkey2url](https://github.com/onozaty/chrome-shortcutkey2url/blob/master/README.md)
+

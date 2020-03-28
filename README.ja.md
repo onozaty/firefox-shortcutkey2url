@@ -23,3 +23,10 @@ Firefox60にてWebExtensions版をリリースしました。
 下記からインストールします。
 
 * [ShortcutKey2URL \(WebExtensions\) \- Firefox 向けアドオン](https://addons.mozilla.org/ja/firefox/addon/shortcutkey2url/)
+
+## 利用方法
+
+Chrome版と同等ですので、下記をご参照ください。
+
+* [chrome\-shortcutkey2url/README\.ja\.md at master · onozaty/chrome\-shortcutkey2url](https://github.com/onozaty/chrome-shortcutkey2url/blob/master/README.ja.md)
+
