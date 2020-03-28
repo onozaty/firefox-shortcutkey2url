@@ -1,4 +1,9 @@
-function render(shortcutKeys, listColumnCount) {
+let settings;
+
+function render(shortcutKeys) {
+
+  shortcutKeys = shortcutKeys || settings.shortcutKeys;
+  const listColumnCount = settings.listColumnCount;
 
   const keyMaxLength = Math.max.apply(null, shortcutKeys.map((shortcutKey) => {
     return shortcutKey.key.length;
@@ -15,8 +20,11 @@ function render(shortcutKeys, listColumnCount) {
     columns.push(column);
   }
 
-  for (var i = 0, length = Math.ceil(shortcutKeys.length / listColumnCount) * listColumnCount; i < length; i++) {
-    columns[i % listColumnCount].appendChild(createShortcutKeyElement(shortcutKeys[i], keyMaxLength));
+  const visibleShortcutKeys = shortcutKeys.filter(x => !x.hideOnPopup);
+
+  for (var i = 0, length = Math.ceil(visibleShortcutKeys.length / listColumnCount) * listColumnCount; i < length; i++) {
+
+    columns[i % listColumnCount].appendChild(createShortcutKeyElement(visibleShortcutKeys[i], keyMaxLength));
   }
 }
 
@@ -50,12 +58,10 @@ function createShortcutKeyElement(shortcutKey, keyMaxLength) {
 
 document.getElementById('add').addEventListener('click', () => {
   chrome.runtime.sendMessage({target: 'background-options', name: 'add'});
-  window.close();
 });
 
 document.getElementById('options').addEventListener('click', () => {
   chrome.runtime.openOptionsPage();
-  window.close();
 });
 
 document.addEventListener('keypress', (e) => {
@@ -80,12 +86,15 @@ document.addEventListener('keypress', (e) => {
     if (response.result == HandleResult.FINISH) {
       window.close();
     } else {
-      //render(response.shortcutKeys);
+      if (settings.filterOnPopup) {
+        render(response.shortcutKeys);
+      }
     }
   });
 });
 
 // startup message
 chrome.runtime.sendMessage({target: 'background-handler', name: MessageName.STARTUP}, (response) => {
-  render(response.shortcutKeys, response.listColumnCount);
+  settings = response.settings;
+  render();
 });
