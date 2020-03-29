@@ -12,6 +12,7 @@ class ShortcutKey {
     this.$removeButton = $target.find('button.remove');
 
     this.$inputKey = $target.find('input[name="key"]');
+    this.$inputHideOnPopup = $target.find('input[name="hideOnPopup"]');
     this.$inputAction = $target.find('select[name="action"]');
     this.$inputTitle = $target.find('input[name="title"]');
     this.$inputUrl = $target.find('input[name="url"]');
@@ -47,6 +48,7 @@ class ShortcutKey {
   _apply(data) {
 
     this.$inputKey.val(data.key);
+    this.$inputHideOnPopup.prop('checked', data.hideOnPopup || false);
     this.$inputAction.val(data.action);
     this.$inputTitle.val(data.title);
 
@@ -126,13 +128,13 @@ class ShortcutKey {
     this.$target.remove();
   }
 
-  _validateEmpty($input) {
+  _validateNotEmpty($input) {
     if ($input.val() == '') {
       $input.parents('.form-group').addClass('has-error');
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   validate(others) {
@@ -141,7 +143,7 @@ class ShortcutKey {
     this.$duplicateMessage.hide().empty();
 
     var hasError = false;
-    if (this._validateEmpty(this.$inputKey)) {
+    if (!this._validateNotEmpty(this.$inputKey)) {
       hasError = true;
     } else {
       // Duplicate
@@ -164,10 +166,10 @@ class ShortcutKey {
       }
     }
 
-    if (this._validateEmpty(this.$inputAction)) {
+    if (!this._validateNotEmpty(this.$inputAction)) {
       hasError = true;
     }
-    if (this._validateEmpty(this.$inputTitle)) {
+    if (!this._validateNotEmpty(this.$inputTitle)) {
       hasError = true;
     }
 
@@ -177,14 +179,14 @@ class ShortcutKey {
       case ActionId.OEPN_URL_NEW_TAB:
       case ActionId.OPEN_URL_CURRENT_TAB:
 
-        if (this._validateEmpty(this.$inputUrl)) {
+        if (!this._validateNotEmpty(this.$inputUrl)) {
           hasError = true;
         }
         break;
   
       case ActionId.EXECUTE_SCRIPT:
 
-        if (this._validateEmpty(this.$inputScript)) {
+        if (!this._validateNotEmpty(this.$inputScript)) {
           hasError = true;
         }
         break;
@@ -196,7 +198,7 @@ class ShortcutKey {
     if (hasError) {
       this.$alertIcon.show();
     }
-    return hasError;
+    return !hasError;
   }
 
   openDetail() {
@@ -214,6 +216,7 @@ class ShortcutKey {
   data() {
     const data = {
       key: this.$inputKey.val(),
+      hideOnPopup: this.$inputHideOnPopup.prop('checked') || false,
       action: parseInt(this.$inputAction.val(), 10),
       title: this.$inputTitle.val(),
     };
@@ -281,9 +284,9 @@ class ShortcutKeys {
         const others = shortcutKeyAndData
           .filter((x) => x.shortcutKey != shortcutKey)
           .map((x) => x.data);
-        return shortcutKey.validate(others);
+        return !shortcutKey.validate(others);
       })
-      .length > 0;
+      .length == 0;
   }
 
   data() {
@@ -292,11 +295,13 @@ class ShortcutKeys {
 }
 
 function startup(settings) {
-  const $startupKey = $('#startupKey');
-  $startupKey.val(settings.startupCommand.shortcut);
+  $('#startupKey').val(settings.startupCommand.shortcut);
 
   const $inputColumnCount = $('#inputColumnCount');
   $inputColumnCount.val(settings.listColumnCount);
+
+  const $inputFilterOnPopup = $('#inputFilterOnPopup');
+  $inputFilterOnPopup.prop('checked', settings.filterOnPopup || false);
 
   const $formTemplate = $('#template');
 
@@ -360,13 +365,14 @@ function startup(settings) {
     $("#successMessage").hide();
     $("#errorMessage").hide();
 
-    if (!shortcutKeys.validate()) {
+    if (shortcutKeys.validate()) {
       const request = {
         target: 'background-settings',
         name: 'save',
         settings: {
           shortcutKeys: shortcutKeys.data(),
-          listColumnCount: parseInt($inputColumnCount.val(), 10)
+          listColumnCount: parseInt($inputColumnCount.val(), 10),
+          filterOnPopup: $inputFilterOnPopup.prop('checked') || false
         }
       };
       chrome.runtime.sendMessage(request, () => {
