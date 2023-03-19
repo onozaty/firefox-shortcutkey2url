@@ -15,6 +15,8 @@ The items that can be set as actions are as follows.
 * Open URL in current tab.
 * Execute the JavaScript on the current tab.
 * Open URL as a new tab and then execute the JavaScript.
+* Open specified URL in incognito window.
+* Open same URL as the current tab in incognito window.
 
 I released WebExtensions version in Firefox 60.
 
@@ -30,3 +32,4 @@ Since it is same to Chrome version, please refer to the following.
 
 * [chrome\-shortcutkey2url/README\.md at master · onozaty/chrome\-shortcutkey2url](https://github.com/onozaty/chrome-shortcutkey2url/blob/master/README.md)
 
+To enable the Open Private Window actions, go to Extension Details and set "Run in Private Window" to "Allow".

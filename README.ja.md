@@ -15,6 +15,8 @@ ShortcutKey2URL for Firefox WebExtensionsは、ショートカットキーを使
 * 現在のタブにURLを開く。
 * 現在のタブで指定したJavaScriptを実行する。
 * 新規タブとしてURLを開いて、その後に指定したJavaScriptを実行する。
+* シークレットウインドウに指定のURLを開く。
+* シークレットウインドウに現在のタブと同じURLを開く。
 
 Firefox60にてWebExtensions版をリリースしました。
 
@@ -30,3 +32,4 @@ Chrome版と同等ですので、下記をご参照ください。
 
 * [chrome\-shortcutkey2url/README\.ja\.md at master · onozaty/chrome\-shortcutkey2url](https://github.com/onozaty/chrome-shortcutkey2url/blob/master/README.ja.md)
 
+プライベートウインドウを開くアクションを有効にするには、拡張機能の詳細から、「プライベートウィンドウでの実行」を「許可する」に設定してください。
