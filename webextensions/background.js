@@ -22,7 +22,7 @@ Settings.newAsync().then((settings) => {
         } else {
           // save
           settings.update(message.settings).then(() => {
-            sendResponse();
+            sendResponse(settings.data());
           });
         }
         return true;
@@ -55,7 +55,7 @@ Settings.newAsync().then((settings) => {
       });
     });
   }
-  
+
   chrome.contextMenus.create({
     title: 'Add to ShortcutKey2URL',
     contexts: ['all'],
