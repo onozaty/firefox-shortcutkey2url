@@ -1,7 +1,9 @@
+/* Firefox only */
 body {
   font-size: 90%;
   background-color: #ffffff;
 }
+/*--------------*/
 
 #shortcutKeys {
   max-width: 780px;
